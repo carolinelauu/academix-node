@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "*.ejs": "html"
+    },
+    "emmet.includeLanguages": {
+        "ejs": "html",
+    },
+    "html.format.templating": true,
+    "liveshare.notebooks.allowGuestExecuteCells": true,
+    "liveshare.languages.allowGuestCommandControl": true,
+    "liveshare.allowGuestTaskControl": true,
+    "liveshare.allowGuestDebugControl": true
+}

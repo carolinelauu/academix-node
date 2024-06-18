@@ -1,0 +1,337 @@
+@font-face {
+    font-family: 'Excalibur';
+    src: url(../assets/fontes/Excalibur\ Nouveau.ttf);
+ }
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+  
+ :root {
+    --cor1:#003399;
+    --cor2: #0094d9;
+    --cor3: #66ccff;
+ }
+*{
+    margin: 0;
+    padding: 0;
+    /*Uma fonte para o corpo do site XD*/
+}
+main{
+    display: flex;
+}
+.filtrar{
+  background-color: var(--cor2);
+  border: none;
+  border-radius: 15px;
+  width: 130px;
+  height: 40px;
+  color: white;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+.filtrar:hover{
+  background-color: #0286c4;
+}
+.form-container{
+    background-color: var(--cor1);
+    width: 350px;
+    height: 100%;
+    min-height: 100vh;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+}
+.container{
+    max-width: 1280px;
+    margin: 0 auto;
+}
+main #forma{
+    width: 380px;
+    padding: 20px 30px;
+}
+.fa-solid{
+  color: var(--cor2);
+}
+main #forma h1{
+    font-family: 'Excalibur';
+    color: white;
+    font-size: 27px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin: 10px 0;
+}
+main #forma label{
+    color: white;
+    display: block;
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+
+  #svg-map path { fill:#0094d9 }
+  #svg-map text { fill:#fff; font:12px Arial-BoldMT, sans-serif; cursor:pointer }
+  #svg-map a{ text-decoration:none }
+  #svg-map a:hover { cursor:pointer; text-decoration:none }
+  #svg-map a:hover path{ fill:#003399 !important }
+  #svg-map .circle { fill:#66ccff; }
+  #svg-map a:hover .circle { fill:#003399 !important; cursor:pointer }
+  #svg-map{ width: 380px;}
+  select {
+    -webkit-appearance: none;
+    /* Remove estilo padrão do Chrome */
+    -moz-appearance: none;
+    /* Remove estilo padrão do FireFox */
+    appearance: none;
+    /* Remove estilo padrão do FireFox*/
+    background: url(http://www.webcis.com.br/images/imagens-noticias/select/ico-seta-appearance.gif) no-repeat #eeeeee;
+    /* Imagem de fundo (Seta) */
+    background-position: 218px center;
+    /*Posição da imagem do background*/
+    width: 250px;
+    /* Tamanho do select, maior que o tamanho da div "div-select" */
+    height: 20px;
+    /* Altura do select, importante para que tenha a mesma altura em todo os navegadores */
+    border: 1px solid #ddd;
+    color: #003399;
+    text-align: center;
+  }
+  #mainNav{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 110px;
+    padding-right: 90px;
+    align-items: center;
+    height: 70px;
+    border-bottom: 10px solid var(--cor2);
+  }
+  #hed{
+    text-decoration: none;
+    font-family: 'Excalibur';
+    color: var(--cor2);
+    font-size: 27px;
+    letter-spacing: 2px;
+  }
+  #header{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-evenly;
+    width: 200px;
+  }
+
+/*Primeiro POPUP - Cadastro*/
+.popup, .popup2{
+  position: fixed;
+  top: -150%;
+  left: 50%;
+  transform: translate(-50%,-50%)scale(1.25);
+  background-color: whitesmoke;
+  padding: 20px 30px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  transition: 0.5s;
+  opacity: 0;
+  z-index: 101;
+  border: 10px  solid rgba(0, 0, 0, 0.1);
+  font-size: 19px;
+}
+
+.popup label, .popup2 label{
+  font-size: 19px;
+}
+
+.popup{
+  width: 300px;
+  height: 360px;
+}
+#abrir-cadastro{
+  text-decoration-line: underline;
+  color: var(--cor1);
+}
+#abrir-cadastro:hover{
+  color: var(--cor2);
+}
+.popup2 form{
+  width: 590px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.popup.active, .popup2.active{
+  top: 50%;
+  transform: translate(-50%,-50%)scale(1);
+  opacity: 1;
+  
+}
+
+.popup .close-btn{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: default;
+  width: 15px;
+  height: 15px;
+  background: #003399;
+  color: #bfe2e9;
+  text-align: center;
+  line-height: 15px;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+.popup h2, .popup2 h2{
+  text-align: center;
+  font-size: 27px;
+  color: #061774;
+  text-transform: capitalize;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin: 15px 0;
+  font-family: 'Excalibur';
+}
+.formulario .form-element label{
+  display: block;
+  font-size: 18px;
+  margin: 5px 0;
+}
+.popup form .form-element input[type="submit"]{
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px 20px;
+  font-size: 18px;
+  text-transform: capitalize;
+  background-color: #003399;
+  color: #ced4da;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+}
+.formulario .form-element input[type="email"],
+.formulario .form-element input[type="password"],
+.formulario .form-element input[type="text"]{
+  padding: 10px 0;
+  padding-left: 10px;
+  border: 1px solid #d1e7dd;
+  outline: none;
+  margin-bottom: 20px;
+  width: 100%;
+  font-size: 17px;
+}
+.formulario .form-element input[type="submit"]{
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px 20px;
+  font-size: 18px;
+  text-transform: capitalize;
+  background-color: #003399;
+  color: #ced4da;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+}
+
+/*Segundo POPUP - Cadastro*/
+.botao{
+  display: flex;
+  justify-content: space-evenly;
+  width: 250px;
+}
+.popup2 #cancel{
+  background-color: #b02a37;
+}
+#icone2{
+  opacity: 0;
+}
+#icone2.active{
+  transform: translate(-50%,-50%)scale(1);
+  opacity: 1;
+}
+#ativar-login.inactive{
+  opacity: 0;
+  transform: translate(-50%,-50%)scale(1.25);
+}
+#bookmarkthingy{
+  opacity: 0;
+}
+#bookmarkthingy.active{
+  opacity: 1;
+}
+
+body::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: white;        /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--cor1);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  /* creates padding around scroll thumb */
+}
+#escolha{
+  display: flex;
+  justify-content: space-evenly;
+}
+#escolha label{
+  font-size: 18px;
+}
+.select:hover{
+  height: 200px;
+}
+#tabela{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-content: center;
+  padding-top: 30px;
+}
+table{
+  text-align: center;
+  width: 80%;
+  height: fit-content;
+}
+
+td{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: 4px solid var(--cor2);
+}
+.resto{
+  color: var(--cor2);
+}
+#first{
+  background-color: var(--cor2);
+  color: white;
+  font-size: 19px;
+}
+#esqueci-senha{
+  color: var(--cor1);
+}
+#esqueci-senha:hover{
+  color: var(--cor2);
+}
+.cbFave{
+  border: none;
+  border: 1px solid var(--cor1);
+  border-radius: 2px;
+}
+#errom{
+  color: red;
+  padding-top: 5px;
+  height: 20px;
+}
+.btn{
+  background-color: var(--cor1);
+  border: none;
+  border-radius: 15px;
+  width: 150px;
+  color: white;
+  height: 30px;
+}
+.btn:hover{
+  background-color: var(--cor2);
+}
+#oi{
+  padding-left: 100px;
+  width: 100%;
+}

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filtragem</title>
+  <link rel="stylesheet" href="/css/stylefilter.css">
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!--Font Awesome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<body>
+  <!-- Navigation-->
+  <nav id="mainNav">
+    <a id="hed" href="/#page-top">Academix</a>
+    <ul id="header">
+      <li class="nav-item"><a class="nav-link" href="/#about"><i class="fa-solid fa-filter"></i></a></li>
+      <li class="nav-item"><a class="nav-link" href="/#news"><i class="fa-solid fa-newspaper"></i></a></li>
+      <li class="nav-item"><a class="nav-link" id="ativarlogin" href="<%= tagValue %>"><i
+            class="fa-solid fa-user"></i></a></li>
+    </ul>
+  </nav>
+  <!--Tela de login pop up-->
+  <div class="popup" id="popup">
+    <div class="close-btn">&times;</div>
+    <form class="formulario" method="post" action="/login">
+      <h2>Login</h2>
+      <div class="form-element">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Insira seu email" required>
+      </div>
+      <div class="form-element">
+        <label for="password">Senha</label>
+        <input type="password" id="password" name="password" placeholder="Insira sua senha" required>
+        <a id="esqueci-senha" href="#">Esqueceu a senha?</a>
+      </div>
+      <div class="form-element" id="erro">
+        <p id="errom">
+          <%= tagErro %>
+        </p>
+      </div>
+      <div class="form-element">
+        <input type="submit" value="Entrar">
+      </div>
+      <div class="form-element">
+        <p>
+          Não possui cadastro? <a id="abrir-cadastro"> Clique aqui</a>
+        </p>
+      </div>
+    </form>
+    <script>
+      const erro = document.getElementById("errom");
+      let popup = document.querySelector('.popup');
+      if (erro.innerHTML.trim().includes("ados") || erro.innerHTML.trim().includes("login")) {
+        erro.style.display = 'block';
+        popup.classList.add('active');
+      } else {
+        erro.style.display = 'none';
+      }
+
+      let close_btn = document.querySelector('.close-btn');
+      close_btn.addEventListener('click', function () {
+        popup.classList.remove('active');
+        erro.innerHTML = "";
+      });
+    </script>
+
+  </div>
+  <!--Tela de cadastro pop up-->
+  <div class="popup2">
+    <form class="formulario" method="post">
+      <section>
+        <h2>Cadastro</h2>
+        <div class="form-element">
+          <label for="name">Nome</label>
+          <input type="text" id="name" name="nome" placeholder="Insira seu nome" required>
+        </div>
+        <div class="form-element">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Insira seu email" required>
+        </div>
+      </section>
+      <section>
+        <div class="form-element">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" name="senha" placeholder="Insira sua senha" required>
+        </div>
+        <div class="form-element">
+          <label for="pass">Confirme sua senha</label>
+          <input type="password" id="pass" placeholder="Confirmar a senha" required>
+        </div>
+        <div class="botao">
+          <div class="form-element">
+            <input type="submit" value="Salvar" id="save">
+          </div>
+          <div class="form-element">
+            <input type="submit" value="Cancelar" id="cancel">
+          </div>
+      </section>
+    </form>
+  </div>
+  <main>
+    <section class="form-container">
+      <form id="forma" action="#" method="post">
+        <div class="container">
+          <h1>Filtros de pesquisa</h1>
+          <div class="form-element">
+            <label for="state">Estado</label>
+            <select id=cbState name="cbState">
+              <option selected disabled>Selecione um estado</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-element">
+          <label for="uni">Universidade</label>
+          <select id=cbUni multiple name="cbUni" class="select">
+            <option selected disabled>Selecione uma ou mais universidades</option>
+          </select>
+        </div>
+        <div class="form-element">
+          <label for="curso">Curso de graduação</label>
+          <select id=cbCurso multiple name="cbCurso" class="select">
+            <option selected disabled>Selecione um ou mais cursos</option>
+          </select>
+        </div>
+        <div class="form-element">
+          <label for="priv">Instituições</label>
+          <div id="escolha">
+            <input type="radio" name="privado" value="privado" class="rad" id="privado" />
+            <label for="privado">Privadas</label>
+            <input type="radio" name="privado" value="publica" class="rad" id="privado2" />
+            <label for="public">Públicas</label>
+          </div>
+          <br />
+          <input class="filtrar" type="submit" value="Filtrar">
+        </div>
+      </form>
+    </section>
+    <section id="tabela">
+      <form id="oi" action="/favoritos" method="post">
+        <table id="tab">
+
+        </table>
+        <br />
+        <br />
+        <input id="sa" type="submit" value="Salvar Favoritos" class="btn btn-primary" hidden>
+      </form>
+    </section>
+  </main>
+  <script>
+
+    function verificarTabelaVazia() {
+      var tabela = document.getElementById('tabela');
+      var botao = document.getElementById('sa');
+
+      if (tabela.getElementsByTagName('tr').length != 0) {
+        document.getElementById('sa').removeAttribute('hidden', '');
+      } else {
+        document.getElementById('sa').setAttribute('hidden', '');
+      }
+    }
+
+    // Chamada da função ao carregar a página
+    verificarTabelaVazia();
+
+    // Observa mudanças na tabela
+    var observer = new MutationObserver(function (mutationsList) {
+      verificarTabelaVazia();
+    });
+
+    var tabelaNode = document.getElementById('tabela');
+    observer.observe(tabelaNode, {
+      attributes: false,
+      childList: true,
+      subtree: true
+    });
+
+    const $select = document.getElementById('cbState');
+
+    function desabilitaOpcao() {
+      if ($select.value != "Selecione um estado") {
+        document.getElementById('cbUni').setAttribute('disabled', '');
+      } else {
+        document.getElementById('cbUni').removeAttribute('disabled', '');
+      }
+    }
+    $select.addEventListener('input', desabilitaOpcao);
+
+    const $select3 = document.getElementById('cbUni');
+
+    function desabilitaOpcao3() {
+      if ($select3.value != "Selecione uma ou mais universidades") {
+        document.getElementById('cbState').setAttribute('disabled', '');
+        document.getElementById('privado').setAttribute('disabled', '');
+        document.getElementById('privado2').setAttribute('disabled', '');
+
+      } else {
+        document.getElementById('cbState').removeAttribute('disabled', '');
+        document.getElementById('privado').removeAttribute('disabled', '');
+        document.getElementById('privado2').removeAttribute('disabled', '');
+      }
+    }
+    $select3.addEventListener('input', desabilitaOpcao3);
+
+    const $select2 = document.getElementById('cbUni');
+    function desabilitaOpcao2() {
+      if ($select2.value != "Selecione uma ou mais universidades") {
+        document.getElementById('privado').setAttribute('disabled', '');
+        document.getElementById('privado2').setAttribute('disabled', '');
+      } else {
+        document.getElementById('privado').removeAttribute('disabled', '');
+        document.getElementById('privado2').removeAttribute('disabled', '');
+      }
+    }
+    $select2.addEventListener('input', desabilitaOpcao2);
+
+    const selectElement = document.getElementById('cbState');
+    var lista = [{ "sigla_estado": "AC" }, { "sigla_estado": "AL" }, { "sigla_estado": "AM" }, { "sigla_estado": "AP" }, { "sigla_estado": "BA" }, { "sigla_estado": "CE" }, { "sigla_estado": "DF" }, { "sigla_estado": "ES" }, { "sigla_estado": "GO" }, { "sigla_estado": "MA" }, { "sigla_estado": "MG" }, { "sigla_estado": "MS" }, { "sigla_estado": "MT" }, { "sigla_estado": "PA" }, { "sigla_estado": "PB" }, { "sigla_estado": "PE" }, { "sigla_estado": "PI" }, { "sigla_estado": "PR" }, { "sigla_estado": "RJ" }, { "sigla_estado": "RN" }, { "sigla_estado": "RO" }, { "sigla_estado": "RR" }, { "sigla_estado": "RS" }, { "sigla_estado": "SC" }, { "sigla_estado": "SE" }, { "sigla_estado": "SP" }, { "sigla_estado": "TO" }];
+    for (let i = 0; i < lista.length; i++) {
+      const option = document.createElement('option');
+      option.value = lista[i].sigla_estado; // Define o valor da opção
+      option.textContent = lista[i].sigla_estado; // Define o texto visível da opção
+      selectElement.appendChild(option);
+    }
+    const selectElement2 = document.getElementById('cbCurso');
+    var lista2 = [{ "nome_curso": "Ciência da Computação" }, { "nome_curso": "Medicina" }, { "nome_curso": "Engenharia Civil" }, { "nome_curso": "Letras" }];
+    for (let i = 0; i < lista2.length; i++) {
+      const option = document.createElement('option');
+      option.value = lista2[i].nome_curso; // Define o valor da opção
+      option.textContent = lista2[i].nome_curso; // Define o texto visível da opção
+      selectElement2.appendChild(option);
+    }
+    const selectElement3 = document.getElementById('cbUni');
+    var lista3 = [{ "sigla_universidade": "UTFPR" }];
+    for (let i = 0; i < lista3.length; i++) {
+      const option = document.createElement('option');
+      option.value = lista3[i].sigla_universidade; // Define o valor da opção
+      option.textContent = lista3[i].sigla_universidade; // Define o texto visível da opção
+      selectElement3.appendChild(option);
+    }
+
+    const table = document.querySelector('table');
+    var filtro = [{"id_universidade":1,"nome_universidade":"Universidade Tecnológica Federal do Paraná","sigla_estado":"PR","nome_campus":"UTFPR-CM","site":"https://www.utfpr.edu.br/"},{"id_universidade":2,"nome_universidade":"Universidade Federal do Paraná","sigla_estado":"PR","nome_campus":"UFPR-Centro","site":"https://ufpr.br/"},{"id_universidade":1,"nome_universidade":"Universidade Tecnológica Federal do Paraná","sigla_estado":"PR","nome_campus":"UTFPR-Curitiba","site":"https://www.utfpr.edu.br/"},{"id_universidade":1,"nome_universidade":"Universidade Tecnológica Federal do Paraná","sigla_estado":"PR","nome_campus":"UTFPR-Londrina","site":"https://www.utfpr.edu.br/"},{"id_universidade":3,"nome_universidade":"Universidade Estadual de Londrina","sigla_estado":"PR","nome_campus":"UEL-Londrina","site":"https://portal.uel.br/home/"}];
+    const tr = document.createElement('tr');
+    var linha = '';
+    var i = 0;
+    linha = tr.insertCell(0);
+    linha.textContent = "Favoritar";
+    i++;
+    if (filtro != "") {
+      for (let chave in filtro[i - 1]) {
+        if (!chave.includes("id_")) {
+          linha = tr.insertCell(i);
+          i++;
+          chave = chave.replace("_", " ");
+          chave = chave.charAt(0).toUpperCase() + chave.slice(1);
+          if (chave.includes("site")) {
+            linha.textContent = "site";
+          } else {
+
+            linha.textContent = chave;
+          }
+        }
+      }
+      tr.id = 'first';
+      table.appendChild(tr);
+      var marcador = 0;
+      var mae = 0;
+      for (let index = 0; index < filtro.length; index++) {
+        var linha = '';
+        const tr = document.createElement('tr');
+        var d = 0;
+        const checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+        checkbox.name = marcador;
+        marcador++;
+        linha = tr.insertCell(d);
+        linha.appendChild(checkbox);
+        d++;
+        for (let chave in filtro[index]) {
+          if (!chave.includes("id_")) {
+            if (chave == "privada") {
+              filtro[index][chave] = filtro[index][chave] == "0" ? "não" : "sim";
+            }
+            if (chave.includes("site")) {
+              const input1 = document.createElement('input');
+              input1.value = filtro[index][chave];
+              input1.name = "site" + mae;
+              mae++;
+              input1.id = "site=" + filtro[index][chave];
+              input1.setAttribute('hidden', '');
+              linha.appendChild(input1);
+              const link = document.createElement('a');
+              link.href = filtro[index][chave];
+              link.innerHTML = "visite";
+              linha = tr.insertCell(d);
+              linha.appendChild(link);
+              d++;
+            } else {
+              linha = tr.insertCell(d);
+              linha.textContent = filtro[index][chave];
+              d++;
+            }
+          }
+        }
+        tr.className = 'resto';
+        table.appendChild(tr);
+      }
+    }
+  </script>
+  <script src="js/login.js"></script>
+</body>
+
+</html>
